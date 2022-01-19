@@ -1,0 +1,22 @@
+.root{
+    -fx-font-size: 18;
+    -fx-background-image: url("https://pbs.twimg.com/media/Dlyz-yJWsAAAQma.jpg");
+    }
+
+.text-area {
+    -fx-background-image: url("https://pbs.twimg.com/media/Dlyz-yJWsAAAQma.jpg");
+}
+
+.text-area .scroll-pane .scroll-bar {
+    -fx-background-color: rgba(255,255,255,0.5);
+}
+
+.text-area .viewport {
+    -fx-background-color: transparent;
+}
+
+.text-area .content {
+    -fx-background-color: transparent;
+}
+
+
