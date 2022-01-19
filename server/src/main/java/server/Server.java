@@ -59,10 +59,7 @@ public class Server {
     public void privatMsg(ClientHandler sender, String recipient, String msg){
         String message = String.format("[ %s ]: %s", sender.getNickname(), msg);
         for (ClientHandler client : clients) {
-            if (client.getNickname().equals(recipient)){
-                client.sendMsg(message);
-            }
-            if (client.getNickname().equals(sender.getNickname())){
+            if (client.getNickname().equals(recipient) || client.getNickname().equals(sender.getNickname())){
                 client.sendMsg(message);
             }
         }
