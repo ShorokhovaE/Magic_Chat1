@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 public class ClientHandler {
 
@@ -14,7 +15,7 @@ public class ClientHandler {
 
     private boolean authenticated;
     private String nickname;
-
+    private String login;
 
 
     ClientHandler(Server server, Socket socket){
@@ -29,7 +30,7 @@ public class ClientHandler {
            new Thread(() -> {
 
                 try {
-
+                    socket.setSoTimeout(120000);
                     //цикл аунтификации
                     while (true) {
                         String str = in.readUTF();
@@ -47,21 +48,43 @@ public class ClientHandler {
 
                             String newNick = server.getAuthService()
                                     .getNicknameByLoginAndPassword(token[1],token[2]);
+                            login = token[1];
                             if(newNick != null){
-                                authenticated =true;
-                                nickname = newNick;
-                                sendMsg("/authok " + nickname);
-                                server.subscribe(this);
-                                System.out.println("Клиент: " + nickname + " вошел в чат :)");
-                                break;
+                                if(!server.isLoginAuthenticated(login)){
+                                    authenticated = true;
+                                    nickname = newNick;
+                                    sendMsg("/authok " + nickname);
+                                    server.subscribe(this);
+                                    System.out.println("Клиент: " + nickname + " вошел в чат");
+                                    break;
+                                } else {
+                                    sendMsg("Этот пользователь уже в чате. Попробуй другое имя!");
+                                }
                             } else {
                                 sendMsg("Нет такого пользователя! Ты что-то путаешь...");
+                            }
+                        }
+
+                        if (str.startsWith("/reg")){ //если полученное сообщение начинается на /reg
+                            // делим полученное сообщение на 4 части
+                            String[] token = str.split(" ", 4);
+                            if(token.length<4){ // если получили меньше 4 значений, то ничего не происходит
+                                continue;
+                            }
+                            //с помощью getAuthService() получаем ссылку на объект интерфейса AuthService и
+                            // выполняем метод registration из класса SimpleAuthService с переданными логином, паролем и никнеймом
+                            if(server.getAuthService().registration(token[1], token[2], token[3])){
+                                // если метод возвращает true, то отправляем сообщение /reg_ok
+                                sendMsg("/reg_ok");
+                            } else { // если метод вернул false, то отправляем /reg_no
+                                sendMsg("/reg_no");
                             }
                         }
                     }
 
                     //цикл работы
                     while (authenticated) {
+                        socket.setSoTimeout(0);
                         String str = in.readUTF();
 
                         if (str.equals("/end")) {
@@ -74,10 +97,12 @@ public class ClientHandler {
                             server.broadcastMsg(this, str);
                         }
                     }
+                } catch (SocketTimeoutException e) {
+                    sendMsg("/end");
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
-                    System.out.println("Клиент "+ nickname + " ушел из чата :(");
+                    System.out.println("Клиент: "+ nickname + " ушел из чата");
                     server.unsubscribe(this);
                     try {
                         socket.close();
@@ -103,5 +128,9 @@ public class ClientHandler {
 
     public String getNickname() {
         return nickname;
+    }
+
+    public String getLogin() {
+        return login;
     }
 }
