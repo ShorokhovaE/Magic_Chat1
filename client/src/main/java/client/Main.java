@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("chat.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 510, 340);
+        Scene scene = new Scene(fxmlLoader.load(), 700, 400);
         stage.setTitle("Magic chat");
         stage.setScene(scene);
         stage.show();

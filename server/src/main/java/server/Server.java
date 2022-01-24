@@ -26,7 +26,7 @@ public class Server {
 
             while (true){ // цикл на ожидание подключения пользователей
                 socket = server.accept();
-                System.out.println("Клиент подключился!");
+                System.out.println("Кто-то из клиентов подключился!");
                 new ClientHandler(this, socket);
             }
         } catch (IOException e) {
@@ -43,9 +43,11 @@ public class Server {
 
     public void subscribe(ClientHandler clientHandler){
         clients.add(clientHandler);
+        broadcastClientList(); // отправляем после подключения список всех активных пользователей
     }
     public void unsubscribe(ClientHandler clientHandler){
         clients.remove(clientHandler);
+        broadcastClientList(); // отправляем после отключения список всех активных пользователей
     }
 
 
@@ -63,10 +65,33 @@ public class Server {
                 client.sendMsg(message);
             }
         }
+    }
 
 
+    public boolean isLoginAuthenticated (String login){
+        for (ClientHandler client : clients) {
+            if(client.getLogin().equals(login)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void broadcastClientList(){ // отправка списка активных пользователей
+        StringBuilder sb = new StringBuilder("/clientlist");
+
+        for (ClientHandler client : clients) {
+            sb.append(" ").append(client.getNickname());
+        }
+
+        String message = sb.toString();
+
+        for (ClientHandler client : clients) {
+            client.sendMsg(message);
+        }
 
     }
+
 
     public AuthService getAuthService() {
         return authService;
