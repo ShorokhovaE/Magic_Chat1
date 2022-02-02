@@ -7,12 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -38,6 +36,13 @@ public class Client implements Initializable {
     public HBox msgPanel;
     @FXML
     public ListView<String> clientList;
+    @FXML
+    public Button changeNickname;
+    @FXML
+    public HBox changeNicknamePanel;
+    @FXML
+    public TextField newNicknameField;
+
 
     private Socket socket;
     private DataInputStream in;
@@ -62,6 +67,8 @@ public class Client implements Initializable {
         msgPanel.setManaged(authenticated);
         clientList.setVisible(authenticated);
         clientList.setManaged(authenticated);
+        changeNickname.setVisible(authenticated);
+        changeNickname.setManaged(authenticated);
 
         if(!authenticated){
             nickname = "";
@@ -145,8 +152,11 @@ public class Client implements Initializable {
                                     }
                                 });
                             }
-
-                        }else {
+                            if(str.startsWith("/change")){
+                                changeNicknameStatus(str);
+                            }
+                        }
+                        else {
                             Chat.appendText(str + "\n");
                         }
                     }
@@ -262,5 +272,53 @@ public class Client implements Initializable {
         }
     }
 
+    public void tryToChangeNickname(String newNickname){
+        String msg = String.format("/change %s %s", newNickname, nickname);
 
+        try {
+            out.writeUTF(msg);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void clickBtnOpenChangeNickname(ActionEvent actionEvent) {
+        changeNicknamePanel.setVisible(true);
+        changeNicknamePanel.setManaged(true);
+        changeNickname.setVisible(false);
+        changeNickname.setManaged(false);
+    }
+
+
+    public void clickBtnChangeNickname(ActionEvent actionEvent) {
+
+        String newNickname = newNicknameField.getText().trim();
+
+        changeNicknamePanel.setVisible(false);
+        changeNicknamePanel.setManaged(false);
+        changeNickname.setVisible(true);
+        changeNickname.setManaged(true);
+
+        tryToChangeNickname(newNickname);
+
+    }
+
+
+    public void clickBtnCancelChNickname(ActionEvent actionEvent) {
+        changeNicknamePanel.setVisible(false);
+        changeNicknamePanel.setManaged(false);
+        changeNickname.setVisible(true);
+        changeNickname.setManaged(true);
+    }
+
+    public void changeNicknameStatus(String result){
+        String[] str = result.split(" ", 2);
+        if(str[0].equals("/change_ok")){
+            setTitle(str[1]);
+            Chat.appendText("Ник успешно изменен на " + str[1] +"\n");
+        }else {
+            Chat.appendText("Неуспешно. Ник " + str[1] + " уже занят\n");
+        }
+    }
 }

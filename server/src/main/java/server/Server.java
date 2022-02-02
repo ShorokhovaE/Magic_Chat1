@@ -14,15 +14,21 @@ public class Server {
 
     private List<ClientHandler> clients; // список пользователей
     private AuthService authService;
+    private ChangeNick changeNick;
+
 
     public Server() {
 
         clients = new CopyOnWriteArrayList<>(); // потокобезопасная реализация List
-        authService = new SimpleAuthService();
+        authService = new DBAuthService();
+        changeNick = new ChangeNickname();
 
         try {
             server = new ServerSocket(PORT);
             System.out.println("Сервер подключен!");
+
+            // подключаемся к БД
+            DBAuthService.connect();
 
             while (true){ // цикл на ожидание подключения пользователей
                 socket = server.accept();
@@ -31,14 +37,18 @@ public class Server {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            System.out.println("Сервер отлючен");
+            System.out.println("Сервер отключен");
             try {
+                DBAuthService.disconnect(); // отключаемся от БД
                 server.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
     }
 
     public void subscribe(ClientHandler clientHandler){
@@ -95,5 +105,9 @@ public class Server {
 
     public AuthService getAuthService() {
         return authService;
+    }
+
+    public ChangeNick getChangeNick() {
+        return changeNick;
     }
 }

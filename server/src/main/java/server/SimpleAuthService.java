@@ -25,9 +25,9 @@ public class SimpleAuthService implements AuthService{
         for (int i = 0; i < 10; i++) {
             users.add(new UserData("user"+ i, "pass"+i, "nick"+i));
         }
-        users.add(new UserData("qwe", "qwe", "qwe"));
-        users.add(new UserData("asd", "asd", "asd"));
-        users.add(new UserData("zxc", "zxc", "zxc"));
+//        users.add(new UserData("qwe", "qwe", "qwe"));
+//        users.add(new UserData("asd", "asd", "asd"));
+//        users.add(new UserData("zxc", "zxc", "zxc"));
     }
 
     @Override

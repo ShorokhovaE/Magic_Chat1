@@ -9,6 +9,7 @@
 
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
 <BorderPane stylesheets="/Style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Client">
         <top>
             <Label text="Это наш волшебный чат!" textAlignment="CENTER" BorderPane.alignment="TOP_CENTER" />
@@ -23,11 +24,23 @@
         </top>
 
         <center>
-            <HBox>
-                <TextArea fx:id="Chat" HBox.hgrow="ALWAYS" editable="false"/>
-                <ListView fx:id="clientList" managed="false" visible="false" minWidth="100"
-                onMouseReleased="#clickClientList"/>
-            </HBox>
+            <VBox>
+                <HBox fx:id="changeNicknamePanel" visible="false" managed="false">
+                    <TextField fx:id="newNicknameField" promptText="Введите новый никнейм" HBox.hgrow="ALWAYS"/>
+                    <Button onAction="#clickBtnChangeNickname" text="Изменить ник" />
+                    <Button onAction="#clickBtnCancelChNickname" text="Назад" />
+                </HBox>
+
+                <HBox>
+                    <TextArea fx:id="Chat" HBox.hgrow="ALWAYS" editable="false"/>
+                    <VBox>
+                        <Button fx:id="changeNickname" onAction="#clickBtnOpenChangeNickname" text="Сменить ник" minWidth="170"
+                                managed="false" visible="false"/>
+                        <ListView fx:id="clientList" managed="false" visible="false" minWidth="100"
+                                  onMouseReleased="#clickClientList"/>
+                    </VBox>
+                </HBox>
+            </VBox>
 
         </center>
 
