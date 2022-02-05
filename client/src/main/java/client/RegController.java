@@ -38,6 +38,7 @@ public class RegController {
     public void regStatus(String result){
         if(result.equals("/reg_ok")){
             regChat.appendText("Регистрация прошла успешно. Теперь ты в чате!\n");
+            controller.createHistory(loginField.getText().trim());
         }else {
             regChat.appendText("Регистрация не выполнена. Логин или никнейм заняты\n");
         }

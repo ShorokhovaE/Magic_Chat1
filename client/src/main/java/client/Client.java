@@ -10,15 +10,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+
+import java.io.*;
 import java.net.Socket;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Client implements Initializable {
@@ -56,6 +60,7 @@ public class Client implements Initializable {
     private Stage stage;
     private Stage regStage;
     private RegController regController;
+    private FileWriter fileHistory;
 
     public void setAuthenticated(boolean authenticated) {
         this.authenticated = authenticated;
@@ -76,6 +81,10 @@ public class Client implements Initializable {
 
         setTitle(nickname);
         Chat.clear();
+
+        if(authenticated){
+            showLast100Message(loginField.getText().trim());
+        }
     }
 
 
@@ -120,6 +129,7 @@ public class Client implements Initializable {
                             if(str.startsWith("/authok")){
                                 // поделили полученное служебное сообщение на части и второй элемент записали в никнейм
                                 nickname = str.split(" ")[1];
+                                createHistory(loginField.getText().trim());
                                 setAuthenticated(true); // аунтификация успешна
                                 break;
                             }
@@ -158,6 +168,7 @@ public class Client implements Initializable {
                         }
                         else {
                             Chat.appendText(str + "\n");
+                            addToHistory(str);
                         }
                     }
                 } catch (IOException e) {
@@ -165,6 +176,7 @@ public class Client implements Initializable {
                 } finally {
                     try {
                         socket.close();
+                        closeFileWriter();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -319,6 +331,58 @@ public class Client implements Initializable {
             Chat.appendText("Ник успешно изменен на " + str[1] +"\n");
         }else {
             Chat.appendText("Неуспешно. Ник " + str[1] + " уже занят\n");
+        }
+    }
+
+    public void showLast100Message(String login){
+
+        Platform.runLater(() -> {
+            Chat.clear();
+            List<String> history;
+        try {
+            history = Files.readAllLines(Paths.get(String.format("client/history/history_%s.txt", login)));
+            System.out.println(history.size());
+            if (history.size() > 100) {
+                for (int i = (history.size() - 100); i < history.size(); i++) {
+                    Chat.appendText(history.get(i));
+                    Chat.appendText("\n");
+                }
+            } else {
+                for (int i = 0; i < history.size(); i++) {
+                    Chat.appendText(history.get(i));
+                    Chat.appendText("\n");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        });
+    }
+
+    public void addToHistory(String msq){
+        try {
+            fileHistory.write(msq);
+            fileHistory.write("\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createHistory(String login){
+        try {
+            fileHistory = new FileWriter(String.format("client/history/history_%s.txt", login), true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void closeFileWriter(){
+        try {
+            if(fileHistory != null){
+                fileHistory.close();
+                System.out.println("Закрыли FileFilter");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
