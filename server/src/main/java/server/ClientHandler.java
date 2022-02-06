@@ -132,6 +132,8 @@ public class ClientHandler {
 
             });
 
+            service.shutdown();
+
         } catch (IOException e) {
             e.printStackTrace();
     }
