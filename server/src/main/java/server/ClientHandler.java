@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.sql.SQLException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ClientHandler {
 
@@ -28,8 +30,9 @@ public class ClientHandler {
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
 
-           new Thread(() -> {
+            ExecutorService service = Executors.newCachedThreadPool();
 
+            service.execute(() -> {
                 try {
                     socket.setSoTimeout(120000);
                     //цикл аунтификации
@@ -48,7 +51,7 @@ public class ClientHandler {
                             }
 
                             String newNick = server.getAuthService()
-                                           .getNicknameByLoginAndPassword(token[1],token[2]);
+                                    .getNicknameByLoginAndPassword(token[1],token[2]);
                             login = token[1];
                             if(newNick != null){
                                 if(!server.isLoginAuthenticated(login)){
@@ -100,14 +103,14 @@ public class ClientHandler {
                             if(change.length<3){
                                 continue;
                             }
-                                if(server.getChangeNick().changeNickname(change[1], change[2])){
-                                    this.nickname = change[1];
-                                    server.unsubscribe(this);
-                                    server.subscribe(this);
-                                    sendMsg("/change_ok " + change[1]);
-                                } else {
-                                    sendMsg("/change_no " + change[1]);
-                                }
+                            if(server.getChangeNick().changeNickname(change[1], change[2])){
+                                this.nickname = change[1];
+                                server.unsubscribe(this);
+                                server.subscribe(this);
+                                sendMsg("/change_ok " + change[1]);
+                            } else {
+                                sendMsg("/change_no " + change[1]);
+                            }
                         }
                         else {
                             server.broadcastMsg(this, str);
@@ -127,7 +130,9 @@ public class ClientHandler {
                     }
                 }
 
-            }).start();
+            });
+
+            service.shutdown();
 
         } catch (IOException e) {
             e.printStackTrace();

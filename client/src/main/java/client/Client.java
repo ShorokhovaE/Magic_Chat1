@@ -341,7 +341,6 @@ public class Client implements Initializable {
             List<String> history;
         try {
             history = Files.readAllLines(Paths.get(String.format("client/history/history_%s.txt", login)));
-            System.out.println(history.size());
             if (history.size() > 100) {
                 for (int i = (history.size() - 100); i < history.size(); i++) {
                     Chat.appendText(history.get(i));
@@ -379,7 +378,7 @@ public class Client implements Initializable {
         try {
             if(fileHistory != null){
                 fileHistory.close();
-                System.out.println("Закрыли FileFilter");
+                System.out.println("Закрыли FileWriter");
             }
         } catch (IOException e) {
             e.printStackTrace();
