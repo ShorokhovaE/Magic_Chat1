@@ -5,9 +5,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientHandler {
 
@@ -19,6 +20,8 @@ public class ClientHandler {
     private boolean authenticated;
     private String nickname;
     private String login;
+
+    private static final Logger logger = Logger.getLogger(ClientHandler.class.getName());
 
 
     ClientHandler(Server server, Socket socket){
@@ -59,7 +62,7 @@ public class ClientHandler {
                                     nickname = newNick;
                                     sendMsg("/authok " + nickname);
                                     server.subscribe(this);
-                                    System.out.println("Клиент: " + nickname + " вошел в чат");
+                                    logger.log(Level.FINE, "Клиент " + nickname + " вошел в чат");
                                     break;
                                 } else {
                                     sendMsg("Этот пользователь уже в чате. Попробуй другое имя!");
@@ -92,28 +95,34 @@ public class ClientHandler {
                     while (authenticated) {
                         String str = in.readUTF();
 
-                        if (str.equals("/end")) {
-                            sendMsg("/end");
-                            break;
-                        } else if(str.startsWith("/w")){
-                            String[] message = str.split(" ", 3);
-                            server.privatMsg(this, message[1], message[2]);
-                        } else if(str.startsWith("/change")){
-                            String[] change = str.split(" ", 3);
-                            if(change.length<3){
-                                continue;
-                            }
-                            if(server.getChangeNick().changeNickname(change[1], change[2])){
-                                this.nickname = change[1];
-                                server.unsubscribe(this);
-                                server.subscribe(this);
-                                sendMsg("/change_ok " + change[1]);
-                            } else {
-                                sendMsg("/change_no " + change[1]);
+                        if(str.startsWith("/")){
+                            logger.log(Level.FINE, "Клиент " + nickname + " прислал команду");
+                            if (str.equals("/end")) {
+                                sendMsg("/end");
+                                break;
+                            } else if(str.startsWith("/w")){
+                                String[] message = str.split(" ", 3);
+                                server.privatMsg(this, message[1], message[2]);
+                                logger.log(Level.FINE, "Клиент " + nickname + " прислал приватное сообщение");
+                            } else if(str.startsWith("/change")){
+                                String[] change = str.split(" ", 3);
+                                if(change.length<3){
+                                    continue;
+                                }
+                                if(server.getChangeNick().changeNickname(change[1], change[2])){
+                                    this.nickname = change[1];
+                                    server.unsubscribe(this);
+                                    server.subscribe(this);
+                                    sendMsg("/change_ok " + change[1]);
+                                } else {
+                                    sendMsg("/change_no " + change[1]);
+                                }
                             }
                         }
                         else {
                             server.broadcastMsg(this, str);
+                            logger.log(Level.FINE, "Клиент " + nickname + " прислал сообщение");
+
                         }
                     }
                 } catch (SocketTimeoutException e) {
@@ -121,7 +130,7 @@ public class ClientHandler {
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
-                    System.out.println("Клиент: "+ nickname + " ушел из чата");
+                    logger.log(Level.FINE, "Клиент "+ nickname + " ушел из чата");
                     server.unsubscribe(this);
                     try {
                         socket.close();

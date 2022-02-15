@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-02-15T16:26:14</date>
+  <millis>1644927974221</millis>
+  <sequence>0</sequence>
+  <logger>server.Server</logger>
+  <level>FINE</level>
+  <class>server.Server</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Сервер подключен!</message>
+</record>
+<record>
+  <date>2022-02-15T16:26:33</date>
+  <millis>1644927993140</millis>
+  <sequence>1</sequence>
+  <logger>server.Server</logger>
+  <level>FINE</level>
+  <class>server.Server</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Кто-то из клиентов подключился!</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-02-15T16:29:02</date>
+  <millis>1644928142614</millis>
+  <sequence>0</sequence>
+  <logger>server.Server</logger>
+  <level>FINE</level>
+  <class>server.Server</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Сервер подключен!</message>
+</record>
+<record>
+  <date>2022-02-15T16:29:14</date>
+  <millis>1644928154483</millis>
+  <sequence>1</sequence>
+  <logger>server.Server</logger>
+  <level>FINE</level>
+  <class>server.Server</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Кто-то из клиентов подключился!</message>
+</record>
+<record>
+  <date>2022-02-15T16:29:14</date>
+  <millis>1644928154502</millis>
+  <sequence>2</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>12</thread>
+  <message>Клиент: qwe вошел в чат</message>
+</record>
+<record>
+  <date>2022-02-15T16:29:22</date>
+  <millis>1644928162105</millis>
+  <sequence>3</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>12</thread>
+  <message>Клиент: qwe ушел из чата</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-02-15T16:32:43</date>
+  <millis>1644928363991</millis>
+  <sequence>0</sequence>
+  <logger>server.Server</logger>
+  <level>FINE</level>
+  <class>server.Server</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Сервер подключен!</message>
+</record>
+<record>
+  <date>2022-02-15T16:32:56</date>
+  <millis>1644928376338</millis>
+  <sequence>1</sequence>
+  <logger>server.Server</logger>
+  <level>FINE</level>
+  <class>server.Server</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Кто-то из клиентов подключился!</message>
+</record>
+<record>
+  <date>2022-02-15T16:32:56</date>
+  <millis>1644928376362</millis>
+  <sequence>2</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>12</thread>
+  <message>Клиент: qwe вошел в чат</message>
+</record>
+<record>
+  <date>2022-02-15T16:33:04</date>
+  <millis>1644928384813</millis>
+  <sequence>3</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>12</thread>
+  <message>Клиент: qwe прислал сообщение</message>
+</record>
+<record>
+  <date>2022-02-15T16:33:08</date>
+  <millis>1644928388532</millis>
+  <sequence>4</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>12</thread>
+  <message>Клиент: qwe прислал команду</message>
+</record>
+<record>
+  <date>2022-02-15T16:33:08</date>
+  <millis>1644928388534</millis>
+  <sequence>5</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>12</thread>
+  <message>Клиент: qwe ушел из чата</message>
+</record>
+<record>
+  <date>2022-02-15T16:33:13</date>
+  <millis>1644928393203</millis>
+  <sequence>6</sequence>
+  <logger>server.Server</logger>
+  <level>FINE</level>
+  <class>server.Server</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Кто-то из клиентов подключился!</message>
+</record>
+<record>
+  <date>2022-02-15T16:33:13</date>
+  <millis>1644928393208</millis>
+  <sequence>7</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>13</thread>
+  <message>Клиент: qwe вошел в чат</message>
+</record>
+<record>
+  <date>2022-02-15T16:33:34</date>
+  <millis>1644928414621</millis>
+  <sequence>8</sequence>
+  <logger>server.Server</logger>
+  <level>FINE</level>
+  <class>server.Server</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Кто-то из клиентов подключился!</message>
+</record>
+<record>
+  <date>2022-02-15T16:33:34</date>
+  <millis>1644928414643</millis>
+  <sequence>9</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>14</thread>
+  <message>Клиент: velly вошел в чат</message>
+</record>
+<record>
+  <date>2022-02-15T16:33:52</date>
+  <millis>1644928432269</millis>
+  <sequence>10</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>13</thread>
+  <message>Клиент: qwe прислал сообщение</message>
+</record>
+<record>
+  <date>2022-02-15T16:34:03</date>
+  <millis>1644928443477</millis>
+  <sequence>11</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>14</thread>
+  <message>Клиент: velly прислал сообщение</message>
+</record>
+<record>
+  <date>2022-02-15T16:34:13</date>
+  <millis>1644928453047</millis>
+  <sequence>12</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>14</thread>
+  <message>Клиент: velly прислал команду</message>
+</record>
+<record>
+  <date>2022-02-15T16:34:26</date>
+  <millis>1644928466271</millis>
+  <sequence>13</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>14</thread>
+  <message>Клиент: velly прислал команду</message>
+</record>
+<record>
+  <date>2022-02-15T16:34:26</date>
+  <millis>1644928466273</millis>
+  <sequence>14</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>14</thread>
+  <message>Клиент: velly ушел из чата</message>
+</record>
+<record>
+  <date>2022-02-15T16:34:27</date>
+  <millis>1644928467338</millis>
+  <sequence>15</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>13</thread>
+  <message>Клиент: qwe прислал команду</message>
+</record>
+<record>
+  <date>2022-02-15T16:34:27</date>
+  <millis>1644928467347</millis>
+  <sequence>16</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>13</thread>
+  <message>Клиент: qwe ушел из чата</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-02-15T16:35:24</date>
+  <millis>1644928524780</millis>
+  <sequence>0</sequence>
+  <logger>server.Server</logger>
+  <level>FINE</level>
+  <class>server.Server</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Сервер подключен!</message>
+</record>
+<record>
+  <date>2022-02-15T16:35:41</date>
+  <millis>1644928541474</millis>
+  <sequence>1</sequence>
+  <logger>server.Server</logger>
+  <level>FINE</level>
+  <class>server.Server</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Кто-то из клиентов подключился!</message>
+</record>
+<record>
+  <date>2022-02-15T16:35:41</date>
+  <millis>1644928541493</millis>
+  <sequence>2</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>12</thread>
+  <message>Клиент qwe вошел в чат</message>
+</record>
+<record>
+  <date>2022-02-15T16:35:47</date>
+  <millis>1644928547495</millis>
+  <sequence>3</sequence>
+  <logger>server.Server</logger>
+  <level>FINE</level>
+  <class>server.Server</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Кто-то из клиентов подключился!</message>
+</record>
+<record>
+  <date>2022-02-15T16:35:47</date>
+  <millis>1644928547507</millis>
+  <sequence>4</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>13</thread>
+  <message>Клиент velly вошел в чат</message>
+</record>
+<record>
+  <date>2022-02-15T16:35:55</date>
+  <millis>1644928555816</millis>
+  <sequence>5</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>13</thread>
+  <message>Клиент velly прислал команду</message>
+</record>
+<record>
+  <date>2022-02-15T16:35:55</date>
+  <millis>1644928555819</millis>
+  <sequence>6</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>13</thread>
+  <message>Клиент velly прислал приватное сообщение</message>
+</record>
+<record>
+  <date>2022-02-15T16:36:02</date>
+  <millis>1644928562978</millis>
+  <sequence>7</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>13</thread>
+  <message>Клиент velly прислал команду</message>
+</record>
+<record>
+  <date>2022-02-15T16:36:02</date>
+  <millis>1644928562981</millis>
+  <sequence>8</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>13</thread>
+  <message>Клиент velly ушел из чата</message>
+</record>
+<record>
+  <date>2022-02-15T16:36:04</date>
+  <millis>1644928564202</millis>
+  <sequence>9</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>12</thread>
+  <message>Клиент qwe прислал команду</message>
+</record>
+<record>
+  <date>2022-02-15T16:36:04</date>
+  <millis>1644928564204</millis>
+  <sequence>10</sequence>
+  <logger>server.ClientHandler</logger>
+  <level>FINE</level>
+  <class>server.ClientHandler</class>
+  <method>lambda$new$0</method>
+  <thread>12</thread>
+  <message>Клиент qwe ушел из чата</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-02-15T16:37:43</date>
+  <millis>1644928663808</millis>
+  <sequence>0</sequence>
+  <logger>server.Server</logger>
+  <level>FINE</level>
+  <class>server.Server</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Сервер подключен!</message>
+</record>
+<record>
+  <date>2022-02-15T16:37:44</date>
+  <millis>1644928664436</millis>
+  <sequence>1</sequence>
+  <logger>server.DBAuthService</logger>
+  <level>INFO</level>
+  <class>server.DBAuthService</class>
+  <method>connect</method>
+  <thread>1</thread>
+  <message>БД подключена</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-02-15T16:38:03</date>
+  <millis>1644928683470</millis>
+  <sequence>0</sequence>
+  <logger>server.Server</logger>
+  <level>INFO</level>
+  <class>server.Server</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Сервер подключен!</message>
+</record>
+<record>
+  <date>2022-02-15T16:38:04</date>
+  <millis>1644928684026</millis>
+  <sequence>1</sequence>
+  <logger>server.DBAuthService</logger>
+  <level>INFO</level>
+  <class>server.DBAuthService</class>
+  <method>connect</method>
+  <thread>1</thread>
+  <message>БД подключена</message>
+</record>
+</log>

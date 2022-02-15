@@ -5,6 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Server {
 
@@ -16,6 +18,8 @@ public class Server {
     private AuthService authService;
     private ChangeNick changeNick;
 
+    private static final Logger logger = Logger.getLogger(Server.class.getName());
+
 
     public Server() {
 
@@ -25,14 +29,14 @@ public class Server {
 
         try {
             server = new ServerSocket(PORT);
-            System.out.println("Сервер подключен!");
+            logger.log(Level.INFO, "Сервер подключен!");
 
             // подключаемся к БД
             DBAuthService.connect();
 
             while (true){ // цикл на ожидание подключения пользователей
                 socket = server.accept();
-                System.out.println("Кто-то из клиентов подключился!");
+                logger.log(Level.FINE, "Кто-то из клиентов подключился!");
                 new ClientHandler(this, socket);
             }
         } catch (IOException e) {
@@ -40,7 +44,7 @@ public class Server {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            System.out.println("Сервер отключен");
+            logger.log(Level.INFO, "Сервер отключен!");
             try {
                 DBAuthService.disconnect(); // отключаемся от БД
                 server.close();
