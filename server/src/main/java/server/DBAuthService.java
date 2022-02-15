@@ -1,11 +1,15 @@
 package server;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DBAuthService implements AuthService {
 
     private static Connection connection;   // чтобы подключиться
     private static Statement stm;           // чтобы делать запросы
+
+    private static final Logger logger = Logger.getLogger(DBAuthService.class.getName());
 
     public static Statement getStm() {
         return stm;
@@ -65,7 +69,7 @@ public class DBAuthService implements AuthService {
         Class.forName("org.sqlite.JDBC");   //используется для загрузки драйвера
         connection = DriverManager.getConnection("jdbc:sqlite:main.db");    //подключение драйвера
         stm = connection.createStatement(); //после получения connection, можем получить stm, чтобы делать запросы
-        System.out.println("БД подключена");
+        logger.log(Level.INFO, "БД подключена");
 
     }
 
