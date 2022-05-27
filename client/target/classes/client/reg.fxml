@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.VBox?>
+<VBox stylesheets="/Style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.RegController">
+
+    <Label text="Логин"/>
+    <TextField fx:id="loginField" promptText="Логин" />
+    <Label text="Пароль"/>
+    <PasswordField fx:id="passwordField" promptText="Пароль" />
+    <Label text="Ник"/>
+    <TextField fx:id="nicknameField" promptText="Ник" />
+
+    <TextArea fx:id="regChat" VBox.vgrow="ALWAYS"  editable="false"/>
+
+    <Button onAction="#clickBtnReg" text="Регистрация" />
+
+    </VBox>
